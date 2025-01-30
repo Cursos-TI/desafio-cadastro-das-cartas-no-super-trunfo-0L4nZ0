@@ -168,6 +168,6 @@ int main() {
         printf("opção inválida");
         //caso a opção do switch seja diferente de todas acima
         break;
-    }//obvio,
+    }
     return 0;
 }
