@@ -44,7 +44,7 @@ void cadastrar_cidades(){//função de cadastro de cidades
         printf("Escolha: ");
         scanf("%d", &n_estado);//coleta a escolha
         limparBuffer();
-        n_estado <= 8 && n_estado >=0 ? x = 1 : printf("\nOpções inválidas");//verifica se a escolha acima foi válida
+        n_estado <= 8 && n_estado >0 ? x = 1 : printf("\nOpções inválidas");//verifica se a escolha acima foi válida
 
     } while (x < 1);//loop que exibe os estados disponíveis para cadastro, coleta a entrada, e verifica se ela é válida, se sim, prossegue, se não, repete o loop
     
@@ -95,7 +95,7 @@ void exibir_cidades(){//função de exibição de dados, boa parte é semelhante
         printf("Escolha: ");
         scanf("%d", &n_estado);
         limparBuffer();
-        n_estado <= 8 && n_estado >=0 ? x = 1 : printf("\nOpções inválidas");
+        n_estado <= 8 && n_estado >0 ? x = 1 : printf("\nOpções inválidas");
 
     } while (x < 1);
 
@@ -134,7 +134,7 @@ void comparar_cidades(){
         printf("Escolha: ");
         scanf("%d", &n_estado);
         limparBuffer();
-        n_estado <= 8 && n_estado >=0 ? x = 1 : printf("\nOpções inválidas");
+        n_estado <= 8 && n_estado >0 ? x = 1 : printf("\nOpções inválidas");
 
     } while (x < 1);//loop para escolher o primeiro estado("n_estado" vai virar "y1"), possuindo validação de escolha
 
@@ -151,7 +151,7 @@ void comparar_cidades(){
         printf("\nEscolha: ");
         scanf("%d", &c1);
 
-        c1 <= 4 && c1 >= 0 ? x = 1 : printf("\nOpções inválidas");
+        c1 <= 4 && c1 > 0 ? x = 1 : printf("\nOpções inválidas");
 
     } while (x < 1);//loop para escolher a primeira cidade("c1"), essa ja atribui direto a variavel certa
 
@@ -167,7 +167,7 @@ void comparar_cidades(){
         printf("Escolha: ");
         scanf("%d", &n_estado);
         limparBuffer();
-        n_estado <= 8 && n_estado >=0 ? x = 1 : printf("\nOpções inválidas");
+        n_estado <= 8 && n_estado >0 ? x = 1 : printf("\nOpções inválidas");
 
     } while (x < 1);//mesmo loop para escolher estado
 
@@ -184,7 +184,7 @@ void comparar_cidades(){
         printf("\nEscolha: ");
         scanf("%d", &c2);
 
-        c1 <= 4 && c1 >= 0 ? x = 1 : printf("\nOpções inválidas");
+        c1 <= 4 && c1 > 0 ? x = 1 : printf("\nOpções inválidas");
 
     } while (x < 1);//mesmo loop de escolha de cidade
 
