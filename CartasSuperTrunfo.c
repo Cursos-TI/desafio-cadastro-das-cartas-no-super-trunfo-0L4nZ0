@@ -54,20 +54,24 @@ void cadastrar_cidades(){//função de cadastro de cidades
     for(int i = 0; i < 4; i++){//loop para cadastro das 4 cidades do estado escolhido ("y = qual estado foi escolhido", "i = qual cidade está sendo cadastrada")
         printf("\nCidade %d: ", i + 1);
         fgets(estado[y].cidade[i], 50, stdin);//usa-se fgets para ler strings com espaços
-        estado[y].cidade[i][strlen(estado[y].cidade[i]) - 1] = '\0';//retira o \n do final da string
+        estado[y].cidade[i][strlen(estado[y].cidade[i]) - 1] = '\0';//substituí o '\n'(sempre um fgets termina lendo o \n) pelo '\0' para evitar problemas de leitura
         limparBuffer();
 
-        printf("\nPopulação: ");
+        printf("População: ");
         scanf("%d", &estado[y].populacao[i]);
+        limparBuffer();
 
         printf("\nÁrea: ");
         scanf("%f", &estado[y].area[i]);
+        limparBuffer();
 
         printf("\nPIB: ");
         scanf("%f", &estado[y].pib[i]);
+        limparBuffer();
 
         printf("\nQuantidade de pontos turísticos: ");
         scanf("%d",&estado[y].turisticos[i]);
+        limparBuffer();
 
 
         estado[y].percapta[i] = estado[y].pib[i] / estado[y].populacao[i];//calculo dos atributos especiais
@@ -95,7 +99,7 @@ void exibir_cidades(){//função de exibição de dados, boa parte é semelhante
         printf("Escolha: ");
         scanf("%d", &n_estado);
         limparBuffer();
-        n_estado <= 8 && n_estado >0 ? x = 1 : printf("\nOpções inválidas");
+        n_estado <= 8 && n_estado >=0 ? x = 1 : printf("\nOpções inválidas");
 
     } while (x < 1);
 
@@ -134,7 +138,7 @@ void comparar_cidades(){
         printf("Escolha: ");
         scanf("%d", &n_estado);
         limparBuffer();
-        n_estado <= 8 && n_estado >0 ? x = 1 : printf("\nOpções inválidas");
+        n_estado <= 8 && n_estado > 0 ? x = 1 : printf("\nOpções inválidas");
 
     } while (x < 1);//loop para escolher o primeiro estado("n_estado" vai virar "y1"), possuindo validação de escolha
 
@@ -167,7 +171,7 @@ void comparar_cidades(){
         printf("Escolha: ");
         scanf("%d", &n_estado);
         limparBuffer();
-        n_estado <= 8 && n_estado >0 ? x = 1 : printf("\nOpções inválidas");
+        n_estado <= 8 && n_estado > 0 ? x = 1 : printf("\nOpções inválidas");
 
     } while (x < 1);//mesmo loop para escolher estado
 
