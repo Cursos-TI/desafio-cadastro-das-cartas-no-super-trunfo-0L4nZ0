@@ -1,260 +1,158 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <locale.h>
 #include <string.h>
+#include <locale.h>
+
+//incluindo bibliotecas necessárias para o funcionamento do programa
+
+//biblioteca de variaveis 
+char estado1[3], codigo1[3], nome1[30];
+char estado2[3], codigo2[3], nome2[30];
+unsigned long int populacao1, populacao2;
+float area1, pib1;
+float area2, pib2;
+int turisticos1, turisticos2;
+float densidade1, densidade2;
+float percapta1, percapta2;
+float superpoder1, superpoder2;
+int escolha_comparacao;
 
 
-typedef struct{
-    char cidade[4][50];
-    int populacao[4];
-    float area[4];
-    float pib[4];
-    int turisticos[4];
-    float percapta[4];
-    float densidade[4];
-    float total[4];
-    
-}Estado;//struct de dados para adicionar os dados de cada cidade
-
-Estado estado[8];//cria 8 structs "Estado"
-char *nome_estado[8] = {"A", "B", "C", "D", "E", "F", "G", "H"};//criei um array para exibir os nomes dos estados em menus e outras interações
-
-void limparBuffer() {                                      // Função para limpar o buffer do stdin depois de cada coleta de dados
+void limparBuffer() { // Função para limpar o buffer do stdin depois de cada coleta de dados
     int c;
     while ((c = getchar()) != '\n' && c != EOF);
 }
 
-void separar_menu(){//função para separar as atividades do menu
-    printf("\n------------------------------------------------------\n");
-}
+int main() {
+    setlocale(LC_ALL, "Portuguese");//define o idioma do sistema 
 
-void cadastrar_cidades(){//função de cadastro de cidades
-    int x = 0;//uso "x" para controlar meus loops, sempre atribuindo "1" a ele para cortar o loop e passar para o próximo, mas antes voltando ele para "0", senão ele skippa o próximo loop
-    int n_estado;//variavel para coletar a escolha do estado no menu
-    int y;//uso exclusivamente para resumir "n_estado" e coloca-lo para zero based "-1" para poder usar de referencia
+    printf("Cadastro de cartas Supertrunfo: \n");
+
+//cadastro da carta 1
+    printf("\nCarta 1: ");
+    printf("\nEstado(a - h): ");
+    scanf("%1s", estado1);
+    limparBuffer();
+
+    printf("\nCódigo da carta(1 - 4): ");
+    scanf("%1s", codigo1);
+    limparBuffer();
+
+    printf("\nNome da cidade: ");
+    fgets(nome1, 30, stdin);
+    nome1[strlen(nome1) - 1] = '\0'; // substituí o '\n'(sempre um fgets termina lendo o \n) pelo '\0' para evitar problemas de leitura
+    limparBuffer();
+
+    printf("\nPopulação: ");
+    scanf("%lu", &populacao1);
+    limparBuffer();
+
+    printf("\nÁrea: ");
+    scanf("%f", &area1);
+    limparBuffer();
+
+    printf("\nPIB: ");
+    scanf("%f", &pib1);
+    limparBuffer();
+
+    printf("\nPontos Turísticos: ");
+    scanf("%d", &turisticos1);
+    limparBuffer();
+
+    densidade1 = populacao1 / area1;
+    percapta1 = pib1 / populacao1;
+    superpoder1 = (float)populacao1 + area1 + pib1 + turisticos1 + percapta1 - densidade1;
+//final do cadastro da carta 1
+
+//cadastro da carta 2
+    printf("\nCarta 2: ");
+    printf("\nEstado(A - H): ");
+    scanf("%1s", estado2);
+    limparBuffer();
+
+    printf("\nCódigo da carta(1 - 4): ");
+    scanf("%1s", codigo2);
+    limparBuffer();
+
+    printf("\nNome da cidade: ");
+    fgets(nome2, 30, stdin);
+    nome2[strlen(nome2) - 1] = '\0'; // substituí o '\n'(sempre um fgets termina lendo o \n) pelo '\0' para evitar problemas de leitura
+    limparBuffer();
+
+    printf("\nPopulação: ");
+    scanf("%lu", &populacao2);
+    limparBuffer();
+
+    printf("\nÁrea: ");
+    scanf("%f", &area2);
+    limparBuffer();
+
+    printf("\nPIB: ");
+    scanf("%f", &pib2);
+    limparBuffer();
+
+    printf("\nPontos Turísticos: ");
+    scanf("%d", &turisticos2);
+    limparBuffer();
+
+    densidade2 = populacao2 / area2;
+    percapta2 = pib2 / populacao2;
+    superpoder2 = (float)populacao2+ area2 + pib2 + turisticos2 + percapta2 - densidade2;
+//final do cadastro da carta 2
+
+
+// exibição:
+    printf("\n---------------------------");
+    printf("\nDados da Carta 1:");
+    printf("\nCódigo: %s %s", estado1, codigo1);
+    printf("\nNome da cidade: %s", nome1);
+    printf("\nPopulação: %lu", populacao1);
+    printf("\nÁrea: %.2fkm²", area1);
+    printf("\nPIB: R$%.2f", pib1);
+    printf("\nPontos Turísticos: %d", turisticos1);
+    printf("\nDensidade populacional: %.2fhab/km²", densidade1);
+    printf("\nPIB per capita: R$%.2f", percapta1);
+    printf("\nSuperpoder: %.2f", superpoder1);
+
+    printf("\n---------------------------");
+    printf("\nDados da Carta 2:");
+    printf("\nCódigo: %s %s", estado2, codigo2);
+    printf("\nNome da cidade: %s", nome2);
+    printf("\nPopulação: %lu", populacao2);
+    printf("\nÁrea: %.2fkm²", area2);
+    printf("\nPIB: R$%.2f", pib2);
+    printf("\nPontos Turísticos: %d", turisticos2);
+    printf("\nDensidade populacional: %.2fhab/km²", densidade2);
+    printf("\nPIB per capita: R$%.2f", percapta2);
+    printf("\nSuperpoder: %.2f", superpoder2);
+    printf("\n---------------------------");
+//fim da exibição
+
+//comparação
+    printf("\nComparação de cartas: ");
+    printf("\nPopulação: ");
+    populacao1 > populacao2 ? printf("Carta 1 venceu") : printf("Carta 2 venceu");
+
+    printf("\nÁrea: ");
+    area1 > area2 ? printf("Carta 1 venceu") : printf("Carta 2 venceu");
+
+    printf("\nPIB: ");
+    pib1 > pib2 ? printf("Carta 1 venceu") : printf("Carta 2 venceu");
+
+    printf("\nPontos Turísticos: ");
+    turisticos1 > turisticos2 ? printf("Carta 1 venceu") : printf("Carta 2 venceu");
+
+    printf("\nDensidade: ");
+    densidade1 < densidade2 ? printf("Carta 1 venceu") : printf("Carta 2 venceu");
     
-    
-    do
-    {
-        printf("\nDe que estado deseja cadastrar as cidades? \n");
-        for (int i = 0; i < 8; i++)
-        {
-            printf("%d- %s\n", i + 1, nome_estado[i]);//exibe os estados de A-H
-        }
-        printf("Escolha: ");
-        scanf("%d", &n_estado);//coleta a escolha
-        limparBuffer();
-        n_estado <= 8 && n_estado >0 ? x = 1 : printf("\nOpções inválidas");//verifica se a escolha acima foi válida
+    printf("\nPib per capta: ");
+    percapta1 > percapta2 ? printf("Carta 1 venceu") : printf("Carta 2 venceu");
 
-    } while (x < 1);//loop que exibe os estados disponíveis para cadastro, coleta a entrada, e verifica se ela é válida, se sim, prossegue, se não, repete o loop
-    
-    x = 0;//retorna "x" para "0" para não entrar em conflito no proximo loop
-    y = n_estado - 1;//uso do "y" sendo feito para resumir e transitar para zero based o "n_estado"
-    
-    for(int i = 0; i < 4; i++){//loop para cadastro das 4 cidades do estado escolhido ("y = qual estado foi escolhido", "i = qual cidade está sendo cadastrada")
-        printf("\nCidade %d: ", i + 1);
-        fgets(estado[y].cidade[i], 50, stdin);//usa-se fgets para ler strings com espaços
-        estado[y].cidade[i][strlen(estado[y].cidade[i]) - 1] = '\0';//substituí o '\n'(sempre um fgets termina lendo o \n) pelo '\0' para evitar problemas de leitura
-        limparBuffer();
-
-        printf("População: ");
-        scanf("%d", &estado[y].populacao[i]);
-        limparBuffer();
-
-        printf("\nÁrea: ");
-        scanf("%f", &estado[y].area[i]);
-        limparBuffer();
-
-        printf("\nPIB: ");
-        scanf("%f", &estado[y].pib[i]);
-        limparBuffer();
-
-        printf("\nQuantidade de pontos turísticos: ");
-        scanf("%d",&estado[y].turisticos[i]);
-        limparBuffer();
+    printf("\nSuperpoder: ");
+    superpoder1 > superpoder2 ? printf("Carta 1 venceu") : printf("Carta 2 venceu");
+    printf("\n---------------------------");
+//fim da comparação
 
 
-        estado[y].percapta[i] = estado[y].pib[i] / estado[y].populacao[i];//calculo dos atributos especiais
-        estado[y].densidade[i] = estado[y].populacao[i] / estado[y].area[i];
-        estado[y].total[i] = estado[y].populacao[i] + estado[y].area[i] + estado[y].pib[i] + estado[y].turisticos[i];
-
-        separar_menu();
-    }
-
-
-}
-
-void exibir_cidades(){//função de exibição de dados, boa parte é semelhante a função de cadastro, então vou poupar explicações
-    int x = 0;//novamente, os mesmos principios das variáveis
-    int n_estado;
-    int y;
-
-    do
-    {
-        printf("\nDe que estado deseja exibir as cidades? \n");
-        for (int i = 0; i < 8; i++)
-        {
-            printf("%d- %s\n", i + 1, nome_estado[i]);
-        }
-        printf("Escolha: ");
-        scanf("%d", &n_estado);
-        limparBuffer();
-        n_estado <= 8 && n_estado >=0 ? x = 1 : printf("\nOpções inválidas");
-
-    } while (x < 1);
-
-    y = n_estado - 1;
-    x = 0;
-
-    for(int i = 0; i < 4; i++){
-        separar_menu();
-        
-        printf("\nCidade %d", i+1);
-        printf("\nNome: %s", estado[y].cidade[i]);
-        printf("\nPopulação: %d pessoas", estado[y].populacao[i]);
-        printf("\nÁrea: %.2fm²", estado[y].area[i]);
-        printf("\nPIB: R$%.2f", estado[y].pib[i]);
-        printf("\nPontos turísticos: %d pontos turísticos", estado[y].turisticos[i]);
-        printf("\nPIB percapta: R$%.2f", estado[y].percapta[i]);
-        printf("\nDensidade: %.2f pessoas por m²", estado[y].densidade[i]);
-        printf("\nTotal de pontos: %.2f pontos", estado[y].total[i]);
-        
-    }
-
-    
-}
-
-void comparar_cidades(){
-    int x, y1, y2, n_estado;//"x" segue com a mesma função, controlar loops; "y1" vou usar para o estado 1, pois ja usei y mais vezes para essa finalidade, "y2" respectivamente para o estado 2
-    int c1, c2;//"n_estado" vai fazer o mesmo papel de só coletar depois ser usado para transferir e converter para zero based; "c1" e "c2" vão ser os indices das cidades escolhidas
-
-    do
-    {
-        printf("\nQual o estado da primeira cidade? \n");
-        for (int i = 0; i < 8; i++)
-        {
-            printf("%d- %s\n", i + 1, nome_estado[i]);
-        }
-        printf("Escolha: ");
-        scanf("%d", &n_estado);
-        limparBuffer();
-        n_estado <= 8 && n_estado > 0 ? x = 1 : printf("\nOpções inválidas");
-
-    } while (x < 1);//loop para escolher o primeiro estado("n_estado" vai virar "y1"), possuindo validação de escolha
-
-    y1 = n_estado - 1;//como dito acima
-    x = 0;//correção para seguir as interações com os próximos loops
-    n_estado = 0;//só para desencargo de consciencia, zerei o n_estado para usa-lo novamente
-
-    do
-    {
-        printf("\nQual a primeira cidade?");
-        for (int i = 0; i < 4; i++){
-            printf("\n%d- %s",i +1, estado[y1].cidade[i]);
-        }
-        printf("\nEscolha: ");
-        scanf("%d", &c1);
-
-        c1 <= 4 && c1 > 0 ? x = 1 : printf("\nOpções inválidas");
-
-    } while (x < 1);//loop para escolher a primeira cidade("c1"), essa ja atribui direto a variavel certa
-
-    separar_menu();
-
-    do
-    {
-        printf("\nQual o estado da segunda cidade? \n");
-        for (int i = 0; i < 8; i++)
-        {
-            printf("%d- %s\n", i + 1, nome_estado[i]);
-        }
-        printf("Escolha: ");
-        scanf("%d", &n_estado);
-        limparBuffer();
-        n_estado <= 8 && n_estado > 0 ? x = 1 : printf("\nOpções inválidas");
-
-    } while (x < 1);//mesmo loop para escolher estado
-
-    y2 = n_estado - 1;
-    x = 0;
-    n_estado = 0;
-
-    do
-    {
-        printf("\nQual a segunda cidade?");
-        for (int i = 0; i < 4; i++){
-            printf("\n%d- %s",i + 1, estado[y2].cidade[i]);
-        }
-        printf("\nEscolha: ");
-        scanf("%d", &c2);
-
-        c1 <= 4 && c1 > 0 ? x = 1 : printf("\nOpções inválidas");
-
-    } while (x < 1);//mesmo loop de escolha de cidade
-
-
-    c1--;//decremento para mudar para zero based
-    c2--;
-
-
-    estado[y1].total[c1] > estado[y2].total[c2]                 ?   printf("Cidade com mais pontos: %s\n", estado[y1].cidade[c1]) : printf("Cidade com a maior quantidade ou igual de pontos: %s\n", estado[y2].cidade[c2]);
-    estado[y1].densidade[c1] > estado[y2].densidade[c2]         ?   printf("Cidade com maior densidade: %s\n", estado[y1].cidade[c1]) : printf("Cidade com a maior quantidade ou igual de densidade: %s\n", estado[y2].cidade[c2]);
-    estado[y1].percapta[c1] > estado[y2].percapta[c2]           ?   printf("Cidade com maior PIB per capita: %s\n", estado[y1].cidade[c1]) : printf("Cidade com a maior quantidade ou igual de PIB per capita: %s\n", estado[y2].cidade[c2]);
-    estado[y1].area[c1] > estado[y2].area[c2]                   ?   printf("Cidade com maior área: %s\n", estado[y1].cidade[c1]) : printf("Cidade com a maior quantidade ou igual de área: %s\n", estado[y2].cidade[c2]);
-    estado[y1].populacao[c1] > estado[y2].populacao[c2]         ?   printf("Cidade com maior população: %s\n", estado[y1].cidade[c1]) : printf("Cidade com a maior quantidade ou igual de população: %s\n", estado[y2].cidade[c2]);
-    estado[y1].pib[c1] > estado[y2].pib[c2]                     ?   printf("Cidade com maior PIB: %s\n", estado[y1].cidade[c1]) : printf("Cidade com a maior quantidade ou igual de PIB: %s\n", estado[y2].cidade[c2]);
-    estado[y1].turisticos[c1] > estado[y2].turisticos[c2]       ?   printf("Cidade com mais pontos turísticos: %s\n", estado[y1].cidade[c1]) : printf("Cidade com a maior quantidade ou igual de pontos turísticos: %s\n", estado[y2].cidade[c2]);
-    //comparações feitas, se é maior ou se é igual ou menor
-}
-
-
-int main(){
-
-    setlocale(LC_ALL, "Portuguese");//indica a linguagem do teclado local, para poder usar caracteres da lingua portuguesa
-    int escolha_menu, sair_menu;//uma vai ser base para o switch do menu, e outra vai fazer o papel que "x" fez nas funções, cancelar o loop
-    sair_menu = 0;//atribuo "0" para inicializar o loop
-
-    do
-    {
-       separar_menu();
-       printf("Menu:\n");
-       printf("\n1- Cadastrar Cidades");
-       printf("\n2- Exibir Cidades");
-       printf("\n3- Comparar Cidades");
-       printf("\n4- Sair");
-
-       printf("\nEscolha uma opção(1-4): ");
-       scanf("%d", &escolha_menu);
-       separar_menu();
-
-       switch (escolha_menu)
-       {
-        case 1:
-            cadastrar_cidades();
-        break;
-
-        case 2:
-            exibir_cidades();
-        break;
-
-        case 3:
-            comparar_cidades();
-        break;
-
-        case 4:
-            sair_menu = 1;
-        break;
-
-        default:
-            printf("\nopção inválida\n");
-            separar_menu();
-        break;
-
-       }
-    } while (sair_menu < 1);//loop do menu principal, sempre que terminar uma tarefa, vai retornar para o menu
-    
-
-
-
-    return 0;
+return 0;   
 }
